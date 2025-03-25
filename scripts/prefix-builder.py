@@ -3,8 +3,16 @@ import sys
 import json
 import uuid
 
+
+#Looks for Argument/ Path to JSON. 
+if len(sys.argv) > 1:
+    workingJson = sys.argv[1]
+else:
+    #Drop JSON in Terminal or Copy/Paste Path file
+    workingJson=str(input("Insert Path to JSON Here: "))
+
 #Initial script setup
-f = open('CardLists/categories/baseball/2022/2022-Panini-Prizm.json')
+f = open(workingJson)
 data = json.load(f)
 category = data['sets']
 
@@ -34,8 +42,7 @@ if selectOption == 2:
         card.update(number = card['number'].replace(prefix + "-",""))
         print(card)
 
-json_object = json.dumps(data, indent=4)
+json_object = json.dumps(data, indent=2)
 
-with open('CardLists/categories/baseball/2022/2022-Panini-Prizm.json','w') as outfile:
+with open(workingJson,'w') as outfile:
     outfile.write(json_object)
-
