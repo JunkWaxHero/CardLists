@@ -24,7 +24,7 @@ for set in category:
 
 #User Prompts
 setChoice = int(input('Enter index of Set to edit '))
-selectOption = int(input('Select Option: \n1.Add Prefix \n2.Remove Prefix\n'))
+selectOption = int(input('Select Option: \n1.Add Prefix \n2.Remove Prefix \n3.Convert Numbers to Signature Lettering \n'))
 prefix = input('Enter prefix for set: ')
 
 #Assigns index for set.
@@ -40,6 +40,17 @@ if selectOption == 1:
 if selectOption == 2:
     for card in category:
         card.update(number = card['number'].replace(prefix + "-",""))
+        print(card)
+
+#Generates initials from Player Name
+def getInitials(name):
+    names = name.split(' ')
+    return f"{names[0][0]}{names[1][0]}"
+
+#Convert Numbers to Signature Lettering, Adds Prefix
+if selectOption == 3:
+    for card in category:
+        card.update(number = prefix + "-" + getInitials(card['name']))
         print(card)
 
 json_object = json.dumps(data, indent=2)
